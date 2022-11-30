@@ -8,7 +8,7 @@ router.post('/login', login);
 router.post('/prev-login', prevLogin);
 router.get('/', getUsers);
 router.get('/:id', getUser);
-router.get('/login/:id',loginToken)
+router.get('/loginT/:id',loginToken)
 router.delete('/:id', deleteUser);
 router.patch('/:id', updateUser);
 

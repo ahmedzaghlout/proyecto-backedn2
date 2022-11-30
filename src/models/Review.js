@@ -2,8 +2,8 @@ const { Schema, model } = require("mongoose");
 
 const ReviewSchema = Schema(
     {
-        user_id: Schema.Types.ObjectId,
-        product_id: Schema.Types.ObjectId,
+        user_id: String,
+        product_id: String,
         rating: Number,
         description: String
     }, { timestamps: { createdAt: 'created_at' } }

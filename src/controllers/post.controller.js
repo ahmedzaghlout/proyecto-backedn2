@@ -1,20 +1,61 @@
 const Post = require("../models/Post");
 
 const getPosts = async (req, res) => {
-  const { post_id } = req.query;
+ 
   try {
-    if (post_id) {
-      const posts = await Post.findById(post_id);
-      res.status(200).json(posts);
-    } else {
-      const { user_id } = req.query;
-      const posts = await Post.find({ owner_id: user_id });
-      res.status(200).json(posts);
-    }
-  } catch (error) {
-    res.status(500).json({ error });
+
+    const post = await Post.find({}).lean();
+
+    res.status(200).json({
+      post,
+    });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: e.message });
   }
 };
+const getPost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.json(post)
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+
+}
+
+const getPostU = async (req, res) => {
+  try {
+    const   id  = req.params.id;
+    const post = await Post.find({ owner_id: id }).lean();
+    res.status(200).json({post });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: e.message });
+  }
+};
+const getPostN = async (req, res) => {
+  try {
+    const   name  = req.params.name;
+    const post = await Post.find({ display_name: name }).lean();
+    res.status(200).json({post });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: e.message });
+  }
+};
+const getPostC = async (req, res) => {
+  try {
+    const   id  = req.params.id;
+    const post = await Post.find({ category_id: id }).lean();
+    res.status(200).json({post });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: e.message });
+  }
+};
+
 
 const createPost = async (req, res) => {
   try {
@@ -66,4 +107,4 @@ const updatepost = async (req, res) => {
   }
 }
 
-module.exports = { createPost, getPosts, getRecentPosts,updatepost,deletepost };
+module.exports = { createPost, getPosts,getPost,getPostU ,getPostN,getPostC,getRecentPosts,updatepost,deletepost };
