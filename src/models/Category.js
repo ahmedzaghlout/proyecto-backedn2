@@ -2,9 +2,9 @@ const { Schema, model } = require("mongoose");
 
 const CategorySchema = Schema(
     {
-        img_url: String,
-        display_name: String,
-        description: String,
+        img_url: {type: String, required: true},
+        display_name: {type: String, required: true},
+        description: {type: String, required: true},
       },
       { timestamps: { createdAt: 'created_at' } }
 );

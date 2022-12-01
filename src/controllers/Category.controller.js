@@ -1,6 +1,7 @@
 const Category = require("../models/Category");
 
 const createCategory = async (req, res) => {
+    //{display_name,img_url,description }
     try {
       const post = await Category.create(req.body);
       res.status(200).json(post);
@@ -24,6 +25,7 @@ const createCategory = async (req, res) => {
 
 
   const deletecategory = async (req, res) => {
+    //{id } as params
     try {
   
       await Category.deleteOne({
@@ -37,6 +39,7 @@ const createCategory = async (req, res) => {
   }
   
   const updatecategory = async (req, res) => {
+      //{id } as params
     try {
       const _id = req.params.id;
       const updatedData = req.body;

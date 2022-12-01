@@ -11,6 +11,7 @@ const getCart = async (req, res) => {
 };
 
 const addToCart = async (req, res) => {
+  //{product_id, user_id}
   try {
     const newList = await Cart.create(req.body);
     res.status(200).json(newList);
@@ -20,6 +21,7 @@ const addToCart = async (req, res) => {
 };
 
 const removeFromCart = async (req, res) => {
+  //{id} as query
   try {
     const remove = await Cart.findByIdAndDelete(req.query.item_id);
     res.status(200).json(remove);
@@ -29,6 +31,7 @@ const removeFromCart = async (req, res) => {
 };
 
 const buyCart = async (req, res) => {
+     //{user_id,product_id}
     try {
         const products = await Cart.find({ user_id: req.body.user_id }).sort({ created_at: -1 })
         await Promise.all(products.map((product) => {

@@ -2,12 +2,12 @@ const { Schema, model } = require("mongoose");
 
 const PostSchema = Schema(
     {
-        owner_id: String,
-        img_url: String,
-        display_name: String,
-        description_id: String,
-        category_id:String,
-        price: String,
+        owner_id: {type: String, required: true},
+        img_url: {type: String, required: true},
+        display_name: {type: String, required: true},
+        description_id: {type: String, required: true},
+        category_id:{type: String, required: true},
+        price: {type: String, required: true},
       },
       { timestamps: { createdAt: 'created_at' } }
 );

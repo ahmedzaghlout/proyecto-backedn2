@@ -12,6 +12,7 @@ const getReviews = async (req, res) => {
 };
 
 const getReview = async (req, res) => {
+     //{ user_id } as params
   try {
     const   id  = req.params.id;
     const review = await Review.find({ user_id: id }).lean();
@@ -22,6 +23,7 @@ const getReview = async (req, res) => {
   }
 };
 const getReviewP = async (req, res) => {
+      //{ product_id } as params
   try {
     const   id  = req.params.id;
     const review = await Review.find({ product_id: id }).lean();
@@ -32,6 +34,7 @@ const getReviewP = async (req, res) => {
   }
 };
 const getReviewR = async (req, res) => {
+    //{ rating } as params
   try {
     const   rate  = req.params.rate;
     const review = await Review.find({ rating: rate }).lean();
@@ -43,6 +46,7 @@ const getReviewR = async (req, res) => {
 };
 
 const postAReview = async (req, res) => {
+  //{user_id,product_id,rating,description}
   try {
     const review = Review.create(req.body);
     res.status(200).json(review);
@@ -52,6 +56,7 @@ const postAReview = async (req, res) => {
 };
 
 const deleteReview = async (req, res) => {
+          //{ id } as params
   try {
 
     await Review.deleteOne({

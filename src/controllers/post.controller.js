@@ -26,6 +26,7 @@ const getPost = async (req, res) => {
 }
 
 const getPostU = async (req, res) => {
+      //{owner_id} as params
   try {
     const   id  = req.params.id;
     const post = await Post.find({ owner_id: id }).lean();
@@ -36,6 +37,7 @@ const getPostU = async (req, res) => {
   }
 };
 const getPostN = async (req, res) => {
+    //{display_name} as params
   try {
     const   name  = req.params.name;
     const post = await Post.find({ display_name: name }).lean();
@@ -46,6 +48,7 @@ const getPostN = async (req, res) => {
   }
 };
 const getPostC = async (req, res) => {
+  //{category_id} as params
   try {
     const   id  = req.params.id;
     const post = await Post.find({ category_id: id }).lean();
@@ -58,6 +61,7 @@ const getPostC = async (req, res) => {
 
 
 const createPost = async (req, res) => {
+     // { owner_id,img_url,display_name,description_id,category_id,price}
   try {
     const post = await Post.create(req.body);
     res.status(200).json(post);
@@ -78,6 +82,7 @@ const getRecentPosts = async (req, res) => {
 
 
 const deletepost = async (req, res) => {
+       //{ id } as params
   try {
 
     await Post.deleteOne({
@@ -91,6 +96,7 @@ const deletepost = async (req, res) => {
 }
 
 const updatepost = async (req, res) => {
+      //{ id } as params
   try {
     const id = req.params.id;
     const updatedData = req.body;

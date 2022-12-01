@@ -1,6 +1,7 @@
 const User = require("../models/User");
 
 const register = async (req, res) => {
+     //{ username, password, displayname }
   const isNew = await User.findOne({ username: req.body.username });
   try {
     if (!isNew) {
@@ -28,6 +29,7 @@ const getUser = async (req, res) => {
 
 
 const deleteUser = async (req, res) => {
+      //{ id } as params
   try {
 
     await User.deleteOne({
@@ -41,6 +43,7 @@ const deleteUser = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
+        //{ id  } as params
   try {
     const id = req.params.id;
     const updatedData = req.body;
@@ -73,6 +76,7 @@ const getUsers = async (req, res) => {
 
 
 const login = async (req, res) => {
+  //{ username, password }
   try {
     const user = await User.findOne({
       username: req.body.username,
@@ -91,6 +95,7 @@ const login = async (req, res) => {
 
 
 const loginToken =  async (req, res) => {
+    //{ id }
   const id = req.params.id;
   try {
     const user = await User.findById(req.params.id);
