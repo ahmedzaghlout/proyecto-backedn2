@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const User = require("src\routes\user.routes.js");
+const User = require("src\routes\cart.routes.js");
 
 const request = require("supertest");
 const app = require("../index");
