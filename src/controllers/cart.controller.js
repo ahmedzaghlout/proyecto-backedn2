@@ -31,18 +31,24 @@ const removeFromCart = async (req, res) => {
 };
 
 const buyCart = async (req, res) => {
-     //{user_id,product_id}
-    try {
-        const products = await Cart.find({ user_id: req.body.user_id }).sort({ created_at: -1 })
-        await Promise.all(products.map((product) => {
-           return History.create({ product_id: product.product_id, user_id: product.user_id })
-        }))
-        await Cart.deleteMany({ user_id: req.body.user_id })
-        res.status(200).json(products)
-    } catch (error) {
-        res.status(500).json({ error });
-    }
-}
+  //{user_id,product_id}
+  try {
+    const products = await Cart.find({ user_id: req.body.user_id }).sort({
+      created_at: -1,
+    });
+    await Promise.all(
+      products.map((product) => {
+        return History.create({
+          product_id: product.product_id,
+          user_id: product.user_id,
+        });
+      })
+    );
+    await Cart.deleteMany({ user_id: req.body.user_id });
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
 
-
-module.exports = {getCart, addToCart, removeFromCart, buyCart}
+module.exports = { getCart, addToCart, removeFromCart, buyCart };

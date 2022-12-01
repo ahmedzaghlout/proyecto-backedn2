@@ -1,7 +1,7 @@
 const User = require("../models/User");
 
 const register = async (req, res) => {
-     //{ username, password, displayname }
+  //{ username, password, displayname }
   const isNew = await User.findOne({ username: req.body.username });
   try {
     if (!isNew) {
@@ -19,19 +19,15 @@ const register = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.json(user)
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-  catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-
-}
-
+};
 
 const deleteUser = async (req, res) => {
-      //{ id } as params
+  //{ id } as params
   try {
-
     await User.deleteOne({
       _id: req.params.id,
     });
@@ -40,29 +36,25 @@ const deleteUser = async (req, res) => {
     console.error(e);
     res.status(500).json({ message: e.message });
   }
-}
+};
 
 const updateUser = async (req, res) => {
-        //{ id  } as params
+  //{ id  } as params
   try {
     const id = req.params.id;
     const updatedData = req.body;
     const options = { new: true };
 
-    const result = await User.findByIdAndUpdate(
-      id, updatedData, options
-    )
+    const result = await User.findByIdAndUpdate(id, updatedData, options);
 
-    res.send(result)
+    res.send(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
-  catch (error) {
-    res.status(400).json({ message: error.message })
-  }
-}
+};
 
 const getUsers = async (req, res) => {
   try {
-
     const users = await User.find({}).lean();
 
     res.status(200).json({
@@ -73,7 +65,6 @@ const getUsers = async (req, res) => {
     res.status(500).json({ message: e.message });
   }
 };
-
 
 const login = async (req, res) => {
   //{ username, password }
@@ -93,20 +84,16 @@ const login = async (req, res) => {
   }
 };
 
-
-const loginToken =  async (req, res) => {
-    //{ id }
+const loginToken = async (req, res) => {
+  //{ id }
   const id = req.params.id;
   try {
     const user = await User.findById(req.params.id);
-    res.json('login user'+user)
-   
+    res.json("login user" + user);
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
   }
-  
 };
-
 
 const prevLogin = async (req, res) => {
   const user = await User.find({ _id: req.body.user_id });
@@ -121,4 +108,13 @@ const prevLogin = async (req, res) => {
   }
 };
 
-module.exports = { register, getUsers, login, prevLogin, getUser, deleteUser,updateUser,loginToken };
+module.exports = {
+  register,
+  getUsers,
+  login,
+  prevLogin,
+  getUser,
+  deleteUser,
+  updateUser,
+  loginToken,
+};

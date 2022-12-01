@@ -12,33 +12,33 @@ const getReviews = async (req, res) => {
 };
 
 const getReview = async (req, res) => {
-     //{ user_id } as params
+  //{ user_id } as params
   try {
-    const   id  = req.params.id;
+    const id = req.params.id;
     const review = await Review.find({ user_id: id }).lean();
-    res.status(200).json({review });
+    res.status(200).json({ review });
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: e.message });
   }
 };
 const getReviewP = async (req, res) => {
-      //{ product_id } as params
+  //{ product_id } as params
   try {
-    const   id  = req.params.id;
+    const id = req.params.id;
     const review = await Review.find({ product_id: id }).lean();
-    res.status(200).json({review });
+    res.status(200).json({ review });
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: e.message });
   }
 };
 const getReviewR = async (req, res) => {
-    //{ rating } as params
+  //{ rating } as params
   try {
-    const   rate  = req.params.rate;
+    const rate = req.params.rate;
     const review = await Review.find({ rating: rate }).lean();
-    res.status(200).json({review });
+    res.status(200).json({ review });
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: e.message });
@@ -56,9 +56,8 @@ const postAReview = async (req, res) => {
 };
 
 const deleteReview = async (req, res) => {
-          //{ id } as params
+  //{ id } as params
   try {
-
     await Review.deleteOne({
       _id: req.params.id,
     });
@@ -67,6 +66,13 @@ const deleteReview = async (req, res) => {
     console.error(e);
     res.status(500).json({ message: e.message });
   }
-}
+};
 
-module.exports = { getReviews, postAReview,getReview,getReviewP,getReviewR ,deleteReview};
+module.exports = {
+  getReviews,
+  postAReview,
+  getReview,
+  getReviewP,
+  getReviewR,
+  deleteReview,
+};
